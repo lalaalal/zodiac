@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{layout}">
+    <head>
+        <title>Zodiac</title>
+    </head>
+    
+    <div layout:fragment="content">
+        <div class="jumbotron">
+            <h1 class="page-header">설명</h1>
+            <p>설명</p>
+            <form class="input-group" action="/search" method="POST">
+                <input class="form-control" type="number" placeholder="배송 번호를 입력하세요." required>
+                <span class="input-group-btn">
+                    <input class="btn btn-default" type="submit" value="검색">
+                </span>
+            </form>
+        </div>
+    </div>
+</html>
