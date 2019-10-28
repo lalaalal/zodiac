@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{layout}">
+<head>
+    <title>신청</title>
+</head>
+<body>
+    <div layout:fragment="content">
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        로그인이 필요한 서비스 입니다.
+    </div>
+    <div class="jumbotron">
+        
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+            <p>
+                보내는 사람 : 누구<br>
+            </p>
+            </div>
+            <div class="col-sm-6 col-md-4">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="받을 사람">
+                <span class="input-group-btn">
+                <input class="btn btn-default" type="submit" value="검색">
+                </span>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
