@@ -23,4 +23,9 @@ public class DeliveryController {
     public String check(Model model) {
         return "check";
     }
+
+    @RequestMapping("/reservation")
+    public String reservation(Model model) {
+        return "reservation";
+    }
 }
