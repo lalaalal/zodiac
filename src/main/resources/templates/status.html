@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}">
+    <head>
+        <title th:text="${pageTitle}"></title>
+    </head>
+    <div layout:fragment="content">
+        <div th:if="${status.equals(true)}" class="alert alert-success" role="alert">성공!</div>
+        <div th:if="${status.equals(false)}" class="alert alert-danger" role="alert">실패</div>
+    </div>
+</html>

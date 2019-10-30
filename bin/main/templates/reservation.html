@@ -26,14 +26,31 @@
             </div>
         </div>
         
-        <div class="card-body">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="받을 사람">
-                <span class="input-group-append">
-                    <input class="btn btn-outline-primary" type="submit" value="검색">
-                </span>
+        <form class="card-body" action="/add/reservation" method="POST">
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" placeholder="설명">
             </div>
-        </div>
+            <hr>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">@</span>
+                </div>
+                <input class="form-control" type="text" placeholder="성명">
+            </div>
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" placeholder="전화번호">
+            </div>
+            <div class="input-group mb-3">
+                <input class="form-control col-8" type="text" placeholder="이메일">
+                <input class="form-control col-4" type="text" placeholder="@example.com">
+            </div>
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" placeholder="주소">
+            </div>
+            <span class="input-group-append justify-content-end">
+                <input class="btn btn-outline-primary pr-3 pl-3" type="submit" value="확인">
+            </span>
+        </form>
     </div>
     </div>
 </body>
