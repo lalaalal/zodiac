@@ -7,11 +7,11 @@
     <div layout:fragment="content">
         <div class="jumbotron">
             <h2>환영합니다!</h2>
-            <form class="input-group" action="/search" method="POST">
-                <input class="form-control" type="number" placeholder="배송 번호를 입력하세요." required>
-                <span class="input-group-btn">
-                    <input class="btn btn-default" type="submit" value="검색">
-                </span>
+            <form class="input-group md-3" action="/search" method="POST">
+                <input class="form-control" type="text" placeholder="배송 번호를 입력하세요.">
+                <div class="input-group-append">
+                    <input class="btn btn-outline-primary" type="submit" value="검색">
+                </div>
             </form>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" layout:decorate="~{layout}">
 <head>
+    <link rel="stylesheet" href="/css/reservation.css">
     <title>신청</title>
 </head>
 <body>
@@ -10,21 +11,27 @@
         <span class="sr-only">Error:</span>
         로그인이 필요한 서비스 입니다.
     </div>
-    <div class="jumbotron">
-        
-        <div class="row">
-            <div class="col-sm-6 col-md-4">
-            <p>
-                보내는 사람 : 누구<br>
-            </p>
+    <div class="card">
+        <div class="card-header navbar">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item" style="font-size: 22px;">택배 예약</li>
+            </ul>
+            <div class="nav btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                    <input type="radio" name="type" id="option1" checked>선불
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="type" id="option2">착불
+                </label>
             </div>
-            <div class="col-sm-6 col-md-4">
+        </div>
+        
+        <div class="card-body">
             <div class="input-group">
                 <input class="form-control" type="text" placeholder="받을 사람">
-                <span class="input-group-btn">
-                <input class="btn btn-default" type="submit" value="검색">
+                <span class="input-group-append">
+                    <input class="btn btn-outline-primary" type="submit" value="검색">
                 </span>
-            </div>
             </div>
         </div>
     </div>
