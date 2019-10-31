@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}">
+    <head>
+        <title>로그인</title>
+    </head>
+    <div layout:fragment="content">
+        <div class="card">
+            <div class="card-header navbar">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item" style="font-size: 22px;">회원 가입</li>
+                </ul>
+            </div>
+            
+            <form class="card-body" action="/add/user" method="POST">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">@</span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="성명">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" placeholder="아이디">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="password" placeholder="비밀번호">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" placeholder="전화번호">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" placeholder="전화번호">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control col-8" type="text" placeholder="이메일">
+                    <input class="form-control col-4" type="text" placeholder="@example.com">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" placeholder="주소">
+                </div>
+                <span class="input-group-append justify-content-end">
+                    <input class="btn btn-outline-primary pr-3 pl-3" type="submit" value="확인">
+                </span>
+            </form>
+        </div>
+    </div>
+</html>

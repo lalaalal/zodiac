@@ -81,10 +81,31 @@ public class UserController {
     }
 
     @RequestMapping("/signup")
-    
+    public String signUp() {
+        return "signup";
+    }
 
     @PostMapping("/add/user")
-    public String signIn(Model model, HttpServletRequest request) {
+    public String addUser(Model model, HttpServletRequest request) {
+        String id = request.getParameter("id");
+        String pw = request.getParameter("pw");
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+
+        try {
+            DeliveryDB deliveryDB = new DeliveryDB();
+            boolean status = deliveryDB.addUser(id, pw, name, phone, email, address);
+
+            if (status)
+                model.addAttribute("status", STATUS_SUCCEED);
+            else
+                model.addAttribute("status", STATUS_FAILED);
+        } catch(Exception e) {
+            System.out.println("An exception occured while connecting sql server");
+        }
+        
         return "status";
     }
 }
