@@ -62,9 +62,9 @@ public class UserController {
 
         if (checkUserExists(userId, userPw)) {
             session.setAttribute("user", new User(userId, userPw));
-            model.addAttribute("status", STATUS_SUCCEED);
+            model.addAttribute("status", true);
         } else {
-            model.addAttribute("status", STATUS_FAILED);
+            model.addAttribute("status", false);
         }
 
         return "status";
@@ -92,11 +92,14 @@ public class UserController {
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
+        String domain = request.getParameter("domain");
         String address = request.getParameter("address");
+
+        pw = SHA256(pw);
 
         try {
             DeliveryDB deliveryDB = new DeliveryDB();
-            boolean status = deliveryDB.addUser(id, pw, name, phone, email, address);
+            boolean status = deliveryDB.addUser(id, pw, name, phone, email + domain, address);
 
             if (status)
                 model.addAttribute("status", STATUS_SUCCEED);

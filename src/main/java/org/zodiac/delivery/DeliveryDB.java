@@ -19,7 +19,7 @@ public class DeliveryDB {
     private static final String USER_SELECT = "SELECT no, id, pw, name, phone, email, address FROM user ";
     private static final String DELIVERY_SELECT = "SELECT delivery.no, S.name, delivery.name, delivery.phone, delivery.email, delivery.address, delivery.status LEFT JOIN user S ON delivery.sender = S.no ";
 
-    private static final String USER_INSERT = "INSERT INTO user (NULL, '%s', '%s', '%s', '%s', '%s', '%s')";
+    private static final String USER_INSERT = "INSERT INTO user VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s')";
     
     private Statement statement;
 
@@ -93,6 +93,7 @@ public class DeliveryDB {
     public boolean addUser(String id, String pw, String name, String phone, String email, String address) {
         try {
             int status = statement.executeUpdate(String.format(USER_INSERT, id, pw, name, phone, email, address));
+            
             return (status == 1) ? true : false;
         } catch (SQLException e) {
             System.out.println("An exception occured while adding user");
