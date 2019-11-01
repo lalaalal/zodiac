@@ -5,7 +5,11 @@ public class Delivery {
     public static int DONE = 1;
     public static int CANCELED = 2;
 
+    public static int PREPAY = 0;
+    public static int POSTPAY = 1;
+
     private int no;
+    private String describe;
     private String senderName;
     private String senderPhone;
     private String recipientName;
@@ -13,9 +17,11 @@ public class Delivery {
     private String recipientEmail;
     private String recipientAddress;
     private int status;
+    private int method;
     
-    public Delivery (int no, String senderName, String senderPhone, String recipientName, String recipientPhone, String recipientEmail, String recipientAddress, int status) {
+    public Delivery (int no, String describe, String senderName, String senderPhone, String recipientName, String recipientPhone, String recipientEmail, String recipientAddress, int status, int method) {
         this.no = no;
+        this.describe = describe;
         this.senderName = senderName;
         this.senderPhone = senderPhone;
         this.recipientName = recipientName;
@@ -30,6 +36,13 @@ public class Delivery {
      */
     public int getNo() {
         return no;
+    }
+
+    /**
+     * @return the describe
+     */
+    public String getDescribe() {
+        return describe;
     }
 
     /**
@@ -82,6 +95,20 @@ public class Delivery {
     }
 
     /**
+     * @return the method
+     */
+    public int getMethod() {
+        return method;
+    }
+
+    /**
+     * @param describe the describe to set
+     */
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    /**
      * @param recipientAddress the recipientAddress to set
      */
     public void setRecipientAddress(String recipientAddress) {
@@ -95,3 +122,4 @@ public class Delivery {
         this.status = status;
     }
 }
+

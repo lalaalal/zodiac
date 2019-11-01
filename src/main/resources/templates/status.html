@@ -4,7 +4,10 @@
         <title th:text="${pageTitle}"></title>
     </head>
     <div layout:fragment="content">
-        <div th:if="${status.equals(true)}" class="alert alert-success" role="alert">성공!</div>
-        <div th:if="${status.equals(false)}" class="alert alert-danger" role="alert">실패</div>
+        <div th:if="${status.equals(true)}" class="alert alert-success" role="alert">성공!<span class="ml-1" th:text="${text}"></span></div>
+        <div th:if="${status.equals(false)}" class="alert alert-danger" role="alert">실패<span class="ml-1" th:text="${text}"></span></div>
+        <span class="input-group-append justify-content-end">
+            <a class="btn btn-outline-primary pr-3 pl-3" href="/">홈으로</a>
+        </span>
     </div>
 </html>

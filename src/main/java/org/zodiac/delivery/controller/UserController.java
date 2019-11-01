@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zodiac.delivery.DeliveryDB;
@@ -18,6 +19,16 @@ public class UserController {
 
     private static final Boolean STATUS_SUCCEED = true;
     private static final Boolean STATUS_FAILED = false;
+
+    public static void checkUserLoggedIn(Model model, HttpSession session) {
+        if (isUserLoggedIn(session))
+            model.addAttribute("login", true);
+        else model.addAttribute("login", false);
+    }
+
+    public static boolean isUserLoggedIn(HttpSession session) {
+        return session.getAttribute("user") != null;
+    }
 
     private String SHA256(String string) {
         try {
@@ -36,32 +47,48 @@ public class UserController {
         }
     }
 
-    private boolean checkUserExists(String id, String pw) {
+    private User checkUser(String id, String pw) {
         try {
             DeliveryDB db = new DeliveryDB();
 
-            User user = db.findUserById(id);
-            if (user == null)
-                return false;
-            if (user.getPw().equals(pw))
-                return true;
+            return db.findUserByIdPw(id, pw);
         } catch (Exception e) {
             e.printStackTrace();
             // System.out.println("SQL Error");
         }
-        return false;
+        return null;
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public String login(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
+        checkUserLoggedIn(model, session);
+        if (isUserLoggedIn(session)) {
+            model.addAttribute("status", false);
+            model.addAttribute("text", "이미 로그인되었습니다.");
+            return "status";
+        }
+
+        return "login";
+    }
+
+    @PostMapping("/signin")
+    public String signIn(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        checkUserLoggedIn(model, session);
+        if (isUserLoggedIn(session)) {
+            model.addAttribute("status", false);
+            model.addAttribute("text", "이미 로그인되었습니다.");
+            return "status";
+        }
 
         String userId = request.getParameter("id");
         String userPw = request.getParameter("pw");
         userPw = SHA256(userPw);
 
-        if (checkUserExists(userId, userPw)) {
-            session.setAttribute("user", new User(userId, userPw));
+        User user = checkUser(userId, userPw);
+        if (user != null) {
+            session.setAttribute("user", user);
             model.addAttribute("status", true);
         } else {
             model.addAttribute("status", false);
@@ -73,6 +100,12 @@ public class UserController {
     @RequestMapping("/logout")
     public String logout(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
+        checkUserLoggedIn(model, session);
+        if (!isUserLoggedIn(session)) {
+            model.addAttribute("status", false);
+            model.addAttribute("text", "로그인되지 않았습니다.");
+            return "status";
+        }
 
         session.removeAttribute("user");
         model.addAttribute("status", STATUS_SUCCEED);
@@ -81,12 +114,28 @@ public class UserController {
     }
 
     @RequestMapping("/signup")
-    public String signUp() {
+    public String signUp(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        checkUserLoggedIn(model, session);
+        if (isUserLoggedIn(session)) {
+            model.addAttribute("status", false);
+            model.addAttribute("text", "이미 로그인되었습니다.");
+            return "status";
+        }
+
         return "signup";
     }
 
     @PostMapping("/add/user")
     public String addUser(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        checkUserLoggedIn(model, session);
+        if (isUserLoggedIn(session)) {
+            model.addAttribute("status", false);
+            model.addAttribute("text", "이미 로그인되었습니다.");
+            return "status";
+        }
+
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
         String name = request.getParameter("name");

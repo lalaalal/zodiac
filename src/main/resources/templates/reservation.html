@@ -6,52 +6,53 @@
 </head>
 <body>
     <div layout:fragment="content">
-    <div class="alert alert-danger" role="alert">
+    <div th:if="${login.equals(false)}" class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
         <a href="/login">로그인</a>이 필요한 서비스 입니다.
     </div>
-    <div class="card">
+    <form class="card" action="/add/delivery" method="POST">
         <div class="card-header navbar">
             <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item" style="font-size: 22px;">택배 예약</li>
             </ul>
             <div class="nav btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-primary active">
-                    <input type="radio" name="type" id="option1" checked>선불
+                    <input type="radio" name="method" value="pre" id="option1" checked>선불
                 </label>
                 <label class="btn btn-primary">
-                    <input type="radio" name="type" id="option2">착불
+                    <input type="radio" name="method" value="post" id="option2">착불
                 </label>
             </div>
         </div>
         
-        <form class="card-body" action="/add/reservation" method="POST">
+        <div class="card-body">
             <div class="input-group mb-3">
-                <input class="form-control" type="text" placeholder="설명">
+                <input class="form-control" name="describe" type="text" placeholder="설명" required>
             </div>
             <hr>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">@</span>
                 </div>
-                <input class="form-control" type="text" placeholder="성명">
+                <input class="form-control" name="name" type="text" placeholder="성명" required>
             </div>
             <div class="input-group mb-3">
-                <input class="form-control" type="text" placeholder="전화번호">
+                <input class="form-control" name="phone" type="text" placeholder="전화번호" required>
             </div>
             <div class="input-group mb-3">
-                <input class="form-control col-8" type="text" placeholder="이메일">
-                <input class="form-control col-4" type="text" placeholder="@example.com">
+                <input class="form-control col-8" name="email" type="text" placeholder="이메일">
+                <input class="form-control col-4" name="domain" type="text" placeholder="@example.com">
             </div>
             <div class="input-group mb-3">
-                <input class="form-control" type="text" placeholder="주소">
+                <input class="form-control" name="address" type="text" placeholder="주소" required>
             </div>
             <span class="input-group-append justify-content-end">
-                <input class="btn btn-outline-primary pr-3 pl-3" type="submit" value="확인">
+                <input th:if="${login.equals(true)}" class="btn btn-outline-primary pr-3 pl-3" type="submit" value="확인">
+                <input th:if="${login.equals(false)}" disabled class="btn btn-outline-primary pr-3 pl-3" type="submit" value="확인">
             </span>
-        </form>
-    </div>
+        </div>
+    </form>
     </div>
 </body>
 </html>

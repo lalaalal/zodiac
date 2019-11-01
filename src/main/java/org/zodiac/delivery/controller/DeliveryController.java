@@ -5,39 +5,69 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zodiac.delivery.DeliveryDB;
+import org.zodiac.delivery.model.Delivery;
+import org.zodiac.delivery.model.Status;
 import org.zodiac.delivery.model.User;
 
 @Controller
 public class DeliveryController {
 
-    private void snedMessage(String phone, String message) {
-
-    }
-
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
     @RequestMapping("/check")
-    public String check() {
+    public String check(Model model,HttpServletRequest request ) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
         return "check";
     }
 
     @PostMapping("/add/delivery")
     public String addDelivery(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.getAttribute("user");
+        UserController.checkUserLoggedIn(model, session);
 
-        model.addAttribute("status", true);
+        String describe = request.getParameter("describe");
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String domain = request.getParameter("domain");
+        String address = request.getParameter("address");
+        String _method = request.getParameter("method");
+        int method = 0;
+        if (_method.equals("pre"))
+            method = Delivery.PREPAY;
+        else method = Delivery.POSTPAY;
+            
+        User sender = (User) session.getAttribute("user");
+
+        try {
+            DeliveryDB deliveryDB = new DeliveryDB();
+            int id = deliveryDB.addDelivery(describe, sender, name, phone, email + domain, address, method);
+
+            if (id != -1) {
+                model.addAttribute("status", Status.STATUS_SUCCEED);
+                ReservationController.snedMessage(phone, String.format(ReservationController.MESSAGE, describe, sender.getName(), sender.getPhone()));
+            }        
+            else
+                model.addAttribute("status", Status.STATUS_FAILED);
+
+            
+        } catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("An exception occured while connecting sql server");
+            model.addAttribute("status", Status.STATUS_FAILED);
+        }
+        
         return "status";
     }
 }
