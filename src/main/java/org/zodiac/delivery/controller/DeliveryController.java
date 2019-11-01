@@ -17,11 +17,16 @@ import org.zodiac.delivery.model.User;
 @Controller
 public class DeliveryController {
 
-    private void setDeliveryModelByNo(int no, Model model) {
+    private boolean setDeliveryModelByNo(int no, Model model) {
         try {
             DeliveryDB deliveryDB = new DeliveryDB();
             Delivery delivery = deliveryDB.findDeliveryByNo(no);
-
+            if (delivery == null) {
+                model.addAttribute("status", false);
+                model.addAttribute("text", "존재하지 않는 택배입니다.");
+                return false;
+            }
+                
             if (delivery.getMethod() == Delivery.POSTPAY)
                 model.addAttribute("method", "착불");
             else
@@ -40,9 +45,11 @@ public class DeliveryController {
                 model.addAttribute("status", "배송 준비");
             else
                 model.addAttribute("status", "취소됨");
+            return true;
         } catch(Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @RequestMapping("/")
@@ -59,9 +66,10 @@ public class DeliveryController {
         UserController.checkUserLoggedIn(model, session);
 
         String no = request.getParameter("no");
-        setDeliveryModelByNo(Integer.parseInt(no), model);
-
-        return "search";
+        if (setDeliveryModelByNo(Integer.parseInt(no), model))
+            return "search";
+        else
+            return "status";
     }
 
     @GetMapping("/check/delivery")
@@ -80,9 +88,10 @@ public class DeliveryController {
             return "status";
         }
 
-        setDeliveryModelByNo(Integer.parseInt(no), model);
-
-        return "check";
+        if (setDeliveryModelByNo(Integer.parseInt(no), model))
+            return "search";
+        else
+            return "status";
     }
 
     @PostMapping("/add/delivery")
@@ -138,11 +147,12 @@ public class DeliveryController {
                 deliveryDB.updateStatus(Delivery.YES);
             else
                 deliveryDB.updateStatus(Delivery.CANCELED);
+            model.addAttribute("status", true);
         } catch(Exception e) {
             e.printStackTrace();
+            model.addAttribute("status", false);
         }
         
-
         return "status";
     }
 
