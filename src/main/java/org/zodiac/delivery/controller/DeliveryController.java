@@ -17,12 +17,51 @@ import org.zodiac.delivery.model.User;
 @Controller
 public class DeliveryController {
 
+    private void setDeliveryModelByNo(int no, Model model) {
+        try {
+            DeliveryDB deliveryDB = new DeliveryDB();
+            Delivery delivery = deliveryDB.findDeliveryByNo(no);
+
+            if (delivery.getMethod() == Delivery.POSTPAY)
+                model.addAttribute("method", "착불");
+            else
+                model.addAttribute("method", "선불");
+            model.addAttribute("describe", delivery.getDescribe());
+            model.addAttribute("sender", delivery.getSenderName());
+            model.addAttribute("senderPhone", delivery.getSenderPhone());
+            model.addAttribute("recipient", delivery.getRecipientName());
+            model.addAttribute("recipientPhone", delivery.getRecipientPhone());
+            model.addAttribute("recipientAddress", delivery.getRecipientAddress());
+            if (delivery.getStatus() == Delivery.CHECKING)
+                model.addAttribute("status", "확인중");
+            else if (delivery.getStatus() == Delivery.DONE)
+                model.addAttribute("status", "배송 완료");
+            else if (delivery.getStatus() == Delivery.YES)
+                model.addAttribute("status", "배송 준비");
+            else
+                model.addAttribute("status", "취소됨");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @RequestMapping("/")
     public String index(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         UserController.checkUserLoggedIn(model, session);
 
         return "index";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
+        String no = request.getParameter("no");
+        setDeliveryModelByNo(Integer.parseInt(no), model);
+
+        return "search";
     }
 
     @GetMapping("/check/delivery")
@@ -41,18 +80,7 @@ public class DeliveryController {
             return "status";
         }
 
-        try {
-            DeliveryDB deliveryDB = new DeliveryDB();
-            Delivery delivery = deliveryDB.findDeliveryByNo(Integer.parseInt(no));
-
-            model.addAttribute("sender", delivery.getSenderName());
-            model.addAttribute("senderPhone", delivery.getSenderPhone());
-            model.addAttribute("recipient", delivery.getRecipientName());
-            model.addAttribute("recipientPhone", delivery.getRecipientPhone());
-            model.addAttribute("recipientAddress", delivery.getRecipientAddress());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        setDeliveryModelByNo(Integer.parseInt(no), model);
 
         return "check";
     }
@@ -96,5 +124,46 @@ public class DeliveryController {
         }
         
         return "status";
+    } 
+
+    @PostMapping("/update/status")
+    public String updateStatus(Model model, HttpServletRequest request) {
+        String check = request.getParameter("check");
+        try {
+            DeliveryDB deliveryDB = new DeliveryDB();
+            if (check.equals("yes"))
+                deliveryDB.updateStatus(Delivery.YES);
+            else
+                deliveryDB.updateStatus(Delivery.CANCELED);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+
+        return "status";
+    }
+
+    @RequestMapping("/delivery/guide/cost")
+    public String costGuide(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
+        return "cost";
+    }
+
+    @RequestMapping("/delivery/guide/usage")
+    public String usgaeGuide(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
+        return "usage";
+    }
+
+    @RequestMapping("/intro")
+    public String intro(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
+        return "intro";
     }
 }

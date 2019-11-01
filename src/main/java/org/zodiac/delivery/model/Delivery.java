@@ -2,7 +2,8 @@ package org.zodiac.delivery.model;
 
 public class Delivery {
     public static int CHECKING = 0;
-    public static int DONE = 1;
+    public static int YES = 1;
+    public static int DONE = 2;
     public static int CANCELED = 2;
 
     public static int PREPAY = 0;

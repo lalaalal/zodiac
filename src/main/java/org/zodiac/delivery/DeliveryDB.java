@@ -17,10 +17,12 @@ public class DeliveryDB {
     private static final String SERVER_URL = "jdbc:mysql://localhost:3306/" + DATABASE_NAME;
 
     private static final String USER_SELECT = "SELECT no, id, pw, name, phone, email, address FROM user ";
-    private static final String DELIVERY_SELECT = "SELECT delivery.no, delivery.describe, S.name, delivery.name, delivery.phone, delivery.email, delivery.address, delivery.status delivery.method LEFT JOIN user S ON delivery.sender = S.no ";
+    private static final String DELIVERY_SELECT = "SELECT delivery.no, delivery.describe, S.name, S.phone, delivery.name, delivery.phone, delivery.email, delivery.address, delivery.status, delivery.method FROM delivery LEFT JOIN user S ON delivery.sender = S.no ";
 
     private static final String USER_INSERT = "INSERT INTO user VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s')";
     private static final String DELIVERY_INSERT = "INSERT INTO delivery VALUES (NULL, '%s', %s, NULL, '%s', '%s', '%s', '%s', 0, %d)";
+
+    private static final String DELIVERY_STATUS_UPDATE = "UPDATE delivery SET status = %d";
     
     Connection connection;
     private Statement statement;
@@ -80,7 +82,7 @@ public class DeliveryDB {
     }
 
     public Delivery findDeliveryByNo(int no) throws SQLException {
-        ResultSet resultSet = statement.executeQuery(DELIVERY_SELECT + String.format("WHERE no = %d", no));
+        ResultSet resultSet = statement.executeQuery(DELIVERY_SELECT + String.format("WHERE delivery.no = %d", no));
         if (!resultSet.first())
             return null;
 
@@ -125,6 +127,16 @@ public class DeliveryDB {
         } catch (SQLException e) {
             System.out.println("An exception occured while adding delivery");
             return -1;
+        }
+    }
+
+    public boolean updateStatus(int status) {
+        try {
+            int stat = statement.executeUpdate(String.format(DELIVERY_STATUS_UPDATE, status));
+
+            return (stat == 1) ? true : false;
+        } catch(Exception e) {
+            return false;
         }
     }
 

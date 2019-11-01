@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko" layout:decorate="~{layout}">
     <head>
-        <title>Zodiac</title>
+        <title>Mir Post</title>
     </head>
-    
+
     <div layout:fragment="content">
-        <div class="jumbotron">
+        <div class="jumbotron mt-2 pt-4 pd-3">
             <h2>환영합니다!</h2>
-            <form class="input-group md-3" action="/search" method="POST">
-                <input class="form-control" type="text" placeholder="배송 번호를 입력하세요.">
+            <h3 style="font-size: 15px;">미르택배는 택배 승인 시스템을 통해 택배 시스템에 새로운 패러다임을 제시하고 있습니다!</h3>
+        </div>
+        <div class="jumbotron pt-4 pd-1">
+            <b style="font-size: 20px;">배송 조회</b>
+            <form class="input-group md-1" action="/search" method="GET">
+                <input class="form-control" name="no" type="text" placeholder="배송 번호를 입력하세요.">
                 <div class="input-group-append">
                     <input class="btn btn-outline-primary" type="submit" value="검색">
                 </div>
