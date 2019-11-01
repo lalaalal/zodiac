@@ -1,8 +1,5 @@
 package org.zodiac.delivery.controller;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zodiac.delivery.DeliveryDB;
+import org.zodiac.delivery.SHA256Util;
 import org.zodiac.delivery.model.User;
 
 @Controller
@@ -28,23 +26,6 @@ public class UserController {
 
     public static boolean isUserLoggedIn(HttpSession session) {
         return session.getAttribute("user") != null;
-    }
-
-    private String SHA256(String string) {
-        try {
-            MessageDigest sha = MessageDigest.getInstance("SHA-256");
-            sha.update(string.getBytes());
-            byte byteData[] = sha.digest();
-            StringBuffer stringBuffer = new StringBuffer();
-            for(int i = 0 ; i < byteData.length; i++){
-                stringBuffer.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
-            }
-
-            return stringBuffer.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return "";
-        }
     }
 
     private User checkUser(String id, String pw) {
@@ -84,7 +65,7 @@ public class UserController {
 
         String userId = request.getParameter("id");
         String userPw = request.getParameter("pw");
-        userPw = SHA256(userPw);
+        userPw = SHA256Util.SHA256(userPw);
 
         User user = checkUser(userId, userPw);
         if (user != null) {
@@ -144,7 +125,7 @@ public class UserController {
         String domain = request.getParameter("domain");
         String address = request.getParameter("address");
 
-        pw = SHA256(pw);
+        pw = SHA256Util.SHA256(pw);
 
         try {
             DeliveryDB deliveryDB = new DeliveryDB();

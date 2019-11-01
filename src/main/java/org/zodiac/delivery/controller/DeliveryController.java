@@ -5,9 +5,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zodiac.delivery.DeliveryDB;
+import org.zodiac.delivery.SHA256Util;
 import org.zodiac.delivery.model.Delivery;
 import org.zodiac.delivery.model.Status;
 import org.zodiac.delivery.model.User;
@@ -23,10 +25,34 @@ public class DeliveryController {
         return "index";
     }
 
-    @RequestMapping("/check")
-    public String check(Model model,HttpServletRequest request ) {
+    @GetMapping("/check/delivery")
+    public String check(Model model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         UserController.checkUserLoggedIn(model, session);
+
+        String no = request.getParameter("no");
+        String senderId = request.getParameter("senderid");
+        String hash = request.getParameter("hash");
+
+        if (!hash.equals(SHA256Util.SHA256(no + senderId))) {
+            model.addAttribute("status", false);
+            model.addAttribute("text", "변조된 URL 입니다");
+
+            return "status";
+        }
+
+        try {
+            DeliveryDB deliveryDB = new DeliveryDB();
+            Delivery delivery = deliveryDB.findDeliveryByNo(Integer.parseInt(no));
+
+            model.addAttribute("sender", delivery.getSenderName());
+            model.addAttribute("senderPhone", delivery.getSenderPhone());
+            model.addAttribute("recipient", delivery.getRecipientName());
+            model.addAttribute("recipientPhone", delivery.getRecipientPhone());
+            model.addAttribute("recipientAddress", delivery.getRecipientAddress());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
         return "check";
     }
@@ -56,14 +82,15 @@ public class DeliveryController {
 
             if (id != -1) {
                 model.addAttribute("status", Status.STATUS_SUCCEED);
-                ReservationController.snedMessage(phone, String.format(ReservationController.MESSAGE, describe, sender.getName(), sender.getPhone()));
+                String hash = SHA256Util.SHA256(String.valueOf(id) + sender.getId());
+                String message = String.format(ReservationController.MESSAGE, id, sender.getId(), hash);
+                ReservationController.sendMessage(phone, message);
             }        
             else
                 model.addAttribute("status", Status.STATUS_FAILED);
 
             
         } catch(Exception e) {
-            e.printStackTrace();
             System.out.println("An exception occured while connecting sql server");
             model.addAttribute("status", Status.STATUS_FAILED);
         }
