@@ -128,6 +128,9 @@ public class DeliveryController {
 
     @PostMapping("/update/status")
     public String updateStatus(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
         String check = request.getParameter("check");
         try {
             DeliveryDB deliveryDB = new DeliveryDB();
