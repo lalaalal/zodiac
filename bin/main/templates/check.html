@@ -6,7 +6,7 @@
     <div layout:fragment="content">
         <div class="card">
             <h2 class="card-header" th:text="${describe}"></h2>
-            <form action="/update/status" class="card-body">
+            <form action="/update/status" method="POST" class="card-body">
                 <div>
                     보내는 방법 : <span th:text="${method}"></span> <br>
                 </div>
