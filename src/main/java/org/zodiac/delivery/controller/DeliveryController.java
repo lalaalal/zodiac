@@ -238,4 +238,12 @@ public class DeliveryController {
 
         return "intro";
     }
+
+    @RequestMapping("/chatbot")
+    public String chatbot(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
+        return "chatbot";
+    }
 }
