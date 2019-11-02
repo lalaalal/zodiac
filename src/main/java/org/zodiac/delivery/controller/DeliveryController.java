@@ -33,6 +33,7 @@ public class DeliveryController {
                 model.addAttribute("method", "착불");
             else
                 model.addAttribute("method", "선불");
+            model.addAttribute("no", String.valueOf(no));
             model.addAttribute("describe", delivery.getDescribe());
             model.addAttribute("sender", delivery.getSenderName());
             model.addAttribute("senderPhone", delivery.getSenderPhone());
@@ -98,8 +99,16 @@ public class DeliveryController {
         return "view";
     }
 
+    @RequestMapping("/question")
+    public String question(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
+        return "question";
+    }
+
     @GetMapping("/check/delivery")
-    public String check(Model model,HttpServletRequest request) {
+    public String check(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         UserController.checkUserLoggedIn(model, session);
 
@@ -169,11 +178,15 @@ public class DeliveryController {
         String check = request.getParameter("check");
         try {
             DeliveryDB deliveryDB = new DeliveryDB();
-            if (check.equals("yes"))
+            if (check.equals("yes")) {
                 deliveryDB.updateStatus(Delivery.YES);
-            else
+                model.addAttribute("text", "수락하셨습니다.");
+            } else {
                 deliveryDB.updateStatus(Delivery.CANCELED);
+                model.addAttribute("text", "거부하셨습니다.");
+            }
             model.addAttribute("status", true);
+            
         } catch(Exception e) {
             e.printStackTrace();
             model.addAttribute("status", false);
@@ -193,6 +206,7 @@ public class DeliveryController {
             deliveryDB.updateAddress(address);
             
             model.addAttribute("status", true);
+            model.addAttribute("text", "변경되었습니다.");
         } catch(Exception e) {
             e.printStackTrace();
             model.addAttribute("status", false);

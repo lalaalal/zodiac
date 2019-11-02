@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}">
+    <head>
+        <title>마이페이지</title>
+    </head>
+    <div layout:fragment="content">
+        <div class="card">
+            <h5 class="card-header">마이페이지</h5>
+            <div class="card-body">
+                이름 : <th:block th:text="${name}"></th:block><br>
+                전화번호 : <th:block th:text="${phone}"></th:block><br>
+                주소 : <th:block th:text="${address}"></th:block>
+            </div>
+        </div>
+    </div>
+</html>

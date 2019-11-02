@@ -71,11 +71,12 @@ public class UserController {
         if (user != null) {
             session.setAttribute("user", user);
             model.addAttribute("status", true);
+            return "status";
         } else {
-            model.addAttribute("status", false);
+            return "index";
         }
 
-        return "status";
+        
     }
 
     @RequestMapping("/logout")
@@ -87,11 +88,9 @@ public class UserController {
             model.addAttribute("text", "로그인되지 않았습니다.");
             return "status";
         }
-
         session.removeAttribute("user");
-        model.addAttribute("status", STATUS_SUCCEED);
 
-        return "status";
+        return "index";
     }
 
     @RequestMapping("/signup")
@@ -105,6 +104,25 @@ public class UserController {
         }
 
         return "signup";
+    }
+
+    @RequestMapping("/mypage")
+    public String mypage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        checkUserLoggedIn(model, session);
+
+        if (!isUserLoggedIn(session)) {
+            model.addAttribute("status", false);
+            model.addAttribute("text", "로그인되지 않았습니다.");
+            return "status";
+        }
+
+        User user = (User)session.getAttribute("user");
+        model.addAttribute("name", user.getName());
+        model.addAttribute("phone", user.getPhone());
+        model.addAttribute("address", user.getAddress());
+
+        return "mypage";
     }
 
     @PostMapping("/add/user")

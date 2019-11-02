@@ -8,7 +8,8 @@
             <h2 class="card-header" th:text="${describe}"></h2>
             <form action="/update/status" method="POST" class="card-body">
                 <div>
-                    보내는 방법 : <span th:text="${method}"></span> <br>
+                    배송 번호 : <span th:text="${no}"></span> <br>
+                    보내는 방법 : <span th:text="${method}"></span>
                 </div>
                 <hr>
                 <div class="">
@@ -22,15 +23,17 @@
                     주소 : <span th:text="${recipientAddress}"></span> <br>
                     상태 : <span th:text="${status}"></span>
                 </div>
-                
+                <hr>
                 <button class="btn btn-primary" type="submit" name="check" value="yes">승인</button>
                 <button class="btn" type="submit" name="check" value="no">거절</button>
+                <hr>
             </form>
             <form class="input-group mb-3 card-body" action="/update/address" method="POST">
                 <div class="input-group mb-3">
-                    <input class="form-control" name="address" type="text" placeholder="주소">
+                    <input class="form-control" name="address" type="text" placeholder="변경할 주소를 입력해 주세요." required>
                 </div>
                 <input class="btn btn-primary" type="submit" value="주소 변경">
+                <hr>
             </form>
             <script class="card-body" src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"
                 data-client-id="u86j4ripEt8LRfPGzQ8"
