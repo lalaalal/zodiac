@@ -23,6 +23,7 @@ public class DeliveryDB {
     private static final String DELIVERY_INSERT = "INSERT INTO delivery VALUES (NULL, '%s', %s, NULL, '%s', '%s', '%s', '%s', 0, %d)";
 
     private static final String DELIVERY_STATUS_UPDATE = "UPDATE delivery SET status = %d";
+    private static final String DELIVERY_ADDRESS_UPDATE = "UPDATE delivery SET address = '%s'";
     
     Connection connection;
     private Statement statement;
@@ -43,6 +44,17 @@ public class DeliveryDB {
         }
 
         return users;
+    }
+
+    public ArrayList<Delivery> getDeliveries() throws SQLException {
+        ResultSet resultSet = statement.executeQuery(DELIVERY_SELECT);
+        ArrayList<Delivery> deliveries = new ArrayList<>();
+        while (resultSet.next()) {
+            Delivery delivery = generateDelivery(resultSet);
+            deliveries.add(delivery);
+        }
+
+        return deliveries;
     }
 
     public User findUserByNo(int no) throws SQLException {
@@ -133,6 +145,17 @@ public class DeliveryDB {
     public boolean updateStatus(int status) {
         try {
             int stat = statement.executeUpdate(String.format(DELIVERY_STATUS_UPDATE, status));
+
+            return (stat == 1) ? true : false;
+        } catch(Exception e) {
+            return false;
+        }
+    }
+
+    public boolean updateAddress(String address) {
+        try {
+            System.out.println(String.format(DELIVERY_ADDRESS_UPDATE, address));
+            int stat = statement.executeUpdate(String.format(DELIVERY_ADDRESS_UPDATE, address));
 
             return (stat == 1) ? true : false;
         } catch(Exception e) {

@@ -1,0 +1,702 @@
+<div class="wrap">
+
+    <div class="pop_header">
+        <h1 class="h1"><a href="http://pay.naver.com" target="_blank" class="N=a:osr.npay sr_only"><span>네이버페이</span></a></h1>
+        <h2 class="h2 payment"><span>결제</span></h2>
+        <div class="info_login">
+            <div class="img_area">
+                <img src="//img.pay.naver.net/z/wstatic/img/service/front/nsp/profile_default.png" alt="프로필이미지" class="thumb">
+            </div>
+            <span class="name">홍길동</span>
+            <span class="eng_name">(ho******)</span>
+                <button type="button" class="btn_logout _click(nmp.front.nsp.paymentSheet.logout()) _stopDefault">로그아웃</button>
+        </div>
+    </div>
+    <div class="container" id="container">
+
+
+
+
+
+<form name="paymentSheetForm" id="paymentSheetForm" method="post" autocomplete="off">
+<input type="hidden" name="donAgree" value="false" class="_donAgree _certificationForm">
+<input type="hidden" name="paymentId">
+<input type="hidden" name="prestigeKey" value="" class="_certificationForm">
+<input type="hidden" name="fdsUuid" value="" class="_fdsUuid _certificationForm">
+<input type="hidden" name="naverToken" value="" class="_naverToken _certificationForm">
+<input type="hidden" name="naverInitToken" value="" class="_naverInitToken _certificationForm">
+<input type="hidden" name="isNaverPayPasswordAvailable" value="false" class="_certificationForm">
+<input type="hidden" name="authentificationToken" value="" class="_authentificationToken _certificationForm">
+
+<div class="content">
+<div class="pay_section">
+    <span class="band"></span>
+    <div class="top_area">
+        <div class="inner_product">
+            <strong class="name"><span class="title_name">[테스트가맹점]</span><span class="title_sub">택배</span></strong>
+        </div>
+        <div class="inner_amount">
+            <strong><em class="f_thm">1,000</em>원</strong>
+        </div>
+    </div>
+    <div class="middle_area">
+        <span class="band"></span>
+        <div class="inner_left">
+                <div class="point_use">
+                    <h3 class="h3 bg npoint">네이버페이 포인트</h3>
+                    <div class="digitalcont_box">
+                        <dl class="use_point">
+                        <dt class="point_info"><label for="use">사용할 포인트</label><span>(<strong class="f_thm">50,000</strong>원 보유)</span></dt>
+                        <dd class="use_input"><input type="text" id="use" value="0" name="payAmounts.NAVER_CASH" class="f_thm _naverMileage _onlyPriceTarget _payForm _blur(nmp.front.nsp.paymentSheet.checkInputTextAmountValue()) _focus(nmp.front.nsp.paymentSheet.beforeInputPrice()) _stopDefault"><span>원</span></dd>
+                        </dl>
+                    </div>
+                    <div class="saving_area">
+                        <p class="s_checkbox">
+                            <span class="checkbox checkbox-applied" id="btn-useAllMileage">
+                                <span class="N=a:osr.pointall checkbox-mark"></span>
+                                <input type="checkbox" name="c" class="N=a:osr.pointall" id="agree2">
+                            </span>
+                            <label for="agree2">전액사용</label>
+                        </p>
+                    </div>
+                </div>
+
+
+            <div class="payment_info _paymentInfoTitle _paymentMeansArea" style="display: block;">
+                <h3 class="h3 bg paymentinfo">결제정보</h3>
+                <div class="charge">
+                    <p class="txt">카드정보 변경은 <a href="//pay.naver.com/mypage/update" target="_blank" class="N=a:osr.cardinfo link">설정 &gt; 카드정보</a> 에서 하실 수 있습니다.</p>
+                </div>
+                <div class="digitalcont_box payway_space _recentPayMethodArea" style="display:none">
+
+
+
+                    <a href="#" class="N=a:osr.change middle_btn _click(nmp.front.nsp.paymentSheet.hideRecentPayMethodArea()) _stopDefault"><span class="pay_way">결제수단변경</span></a>
+                </div>
+
+
+
+
+
+                <table class="tbl_list _recentPayMethodMonthlyArea" style="display:none" cellspacing="0" cellpadding="0" border="0">
+                    <caption><span class="blind">최근 사용했던 간편결제</span></caption>
+                    <colgroup><col width="113"><col></colgroup>
+                    <tbody>
+                    <tr>
+                        <th scope="row" rowspan="2">
+                            <div class="title ic_terms">
+                                <strong>할부기간</strong>
+                                <span>필수입력</span>
+                            </div>
+                        </th>
+                        <td>
+                            <div class="select_section _recentPayMethodTemplate">
+                                <div id="sel-recentPayMethodInstallment" class="N=a:osr.install _freeInstallmentTemplate selectbox-disabled">
+                                    <select title="할부기간 선택" name="freeInterestInstallmentInfo.installmentMonth" class="selectbox-source _creditCardInstallment _cardInstallmentPeriodClassCode _payForm _change(nmp.front.nsp.paymentSheet.changeInstallment(_creditCardRecentPaymentForm)) _click(nmp.front.nsp.paymentSheet.changeInstallment(_creditCardRecentPaymentForm))" disabled="">
+                                    <option value="01">일시불</option>
+                                        <option value="02">2개월</option>
+                                        <option value="03">3개월</option>
+                                        <option value="04">4개월</option>
+                                        <option value="05">5개월</option>
+                                        <option value="06">6개월</option>
+                                        <option value="07">7개월</option>
+                                        <option value="08">8개월</option>
+                                        <option value="09">9개월</option>
+                                        <option value="10">10개월</option>
+                                        <option value="11">11개월</option>
+                                        <option value="12">12개월</option>
+                                    </select>
+                                    <div class="selectbox-box">
+                                        <div class="selectbox-label" unselectable="on">일시불</div>
+                                    </div>
+                                    
+                                    <span class="drop"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td class="info_word">
+                        <ul class="card_event_lst _eventArea">
+                        </ul>
+                        <ul class="card_event_lst _benefitArea" style="display: block;"></ul>
+                    </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+
+                <div class="pay_tab_area tab_area _payMethodTab" style="display: block;">
+                    <ul class="tab">
+                        <li class="tab_menu _credit_card_tab on"><span class="blind">선택됨</span><a href="#" class="_click(nmp.front.nsp.paymentSheet.switchEasyPaymentMethodTab(CREDIT_CARD)) _stopDefault">카드 간편결제</a></li>
+                        <li class="tab_menu _bank_tab"><a href="#" class="_click(nmp.front.nsp.paymentSheet.switchEasyPaymentMethodTab(BANK)) _stopDefault">계좌 간편결제</a></li>
+                    </ul>
+                </div>
+
+                <div class="payment_space _payMethodTab" style="display: block;">
+                    <h4 class="blind">카드 간편결제</h4>
+                    <table class="pay_list _easyCardCodeList _card_simple_pay_area" style="display: table;" cellspacing="0" cellpadding="0" border="0">
+                        <caption><span class="blind">카드 간편결제 선택</span></caption>
+                        <tbody>
+                            <tr>
+                            <td class="_payMethod _C0 on">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(C0)) _stopDefault">
+                                <span class="pay_logo credit_C0 _click(nmp.front.nsp.paymentSheet.changePayMethod(C0)) _stopDefault"></span>
+                                <span class="pay_text">신한카드</span>
+                                </a>
+                            </td>
+                            <td class="_payMethod _C7">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(C7)) _stopDefault">
+                                <span class="pay_logo credit_C7 _click(nmp.front.nsp.paymentSheet.changePayMethod(C7)) _stopDefault"></span>
+                                <span class="pay_text">삼성카드</span>
+                                </a>
+                            </td>
+                            <td class="_payMethod _CH">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(CH)) _stopDefault">
+                                <span class="pay_logo credit_CH _click(nmp.front.nsp.paymentSheet.changePayMethod(CH)) _stopDefault"></span>
+                                <span class="pay_text">현대카드</span>
+                                </a>
+                            </td>
+                            <td class="_payMethod _C1">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(C1)) _stopDefault">
+                                <span class="pay_logo credit_C1 _click(nmp.front.nsp.paymentSheet.changePayMethod(C1)) _stopDefault"></span>
+                                <span class="pay_text">비씨카드</span>
+                                </a>
+                            </td>
+                            <td class="_payMethod _C3">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(C3)) _stopDefault">
+                                <span class="pay_logo credit_C3 _click(nmp.front.nsp.paymentSheet.changePayMethod(C3)) _stopDefault"></span>
+                                <span class="pay_text">국민카드</span>
+                                </a>
+                            </td>
+                            <td class="_payMethod _CF">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(CF)) _stopDefault">
+                                <span class="pay_logo credit_CF _click(nmp.front.nsp.paymentSheet.changePayMethod(CF)) _stopDefault"></span>
+                                <span class="pay_text">하나카드</span>
+                                </a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class="_payMethod _C5">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(C5)) _stopDefault">
+                                <span class="pay_logo credit_C5 _click(nmp.front.nsp.paymentSheet.changePayMethod(C5)) _stopDefault"></span>
+                                <span class="pay_text">롯데카드</span>
+                                </a>
+                            </td>
+                            <td class="_payMethod _C4">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(C4)) _stopDefault">
+                                <span class="pay_logo credit_C4 _click(nmp.front.nsp.paymentSheet.changePayMethod(C4)) _stopDefault"></span>
+                                <span class="pay_text">NH카드</span>
+                                </a>
+                            </td>
+                            <td class="_payMethod _C9">
+                                <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(C9)) _stopDefault">
+                                <span class="pay_logo credit_C9 _click(nmp.front.nsp.paymentSheet.changePayMethod(C9)) _stopDefault"></span>
+                                <span class="pay_text">씨티카드</span>
+                                </a>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="tbl_list _card_simple_pay_area _payMethodForm" style="display: table;" cellspacing="0" cellpadding="0" border="0">
+                        <caption><span class="blind">결제정보 선택</span></caption>
+                        <colgroup><col width="113"><col></colgroup>
+                        <tbody>
+                        <tr>
+                            <th scope="row" rowspan="2">
+                                <div class="title ic_terms">
+                                    <strong>할부기간</strong>
+                                    <span>필수입력</span>
+                                </div>
+                            </th>
+                            <td>
+                                <div class="select_section _screditcardTemplate _payMethodForm" style="display: block;">
+                                    <div id="sel-payMethodInstallment" class="N=a:osr.install _freeInstallmentTemplate selectbox-disabled">
+                                        <select title="할부기간 선택" name="freeInterestInstallmentInfo.installmentMonth" class="selectbox-source _creditCardInstallment _cardInstallmentPeriodClassCode _payForm _change(nmp.front.nsp.paymentSheet.changeInstallment(_creditCardRecentPaymentForm))" disabled="">
+                                        <option value="01">일시불</option>
+                                            <option value="02">2개월</option>
+                                            <option value="03">3개월</option>
+                                            <option value="04">4개월</option>
+                                            <option value="05">5개월</option>
+                                            <option value="06">6개월</option>
+                                            <option value="07">7개월</option>
+                                            <option value="08">8개월</option>
+                                            <option value="09">9개월</option>
+                                            <option value="10">10개월</option>
+                                            <option value="11">11개월</option>
+                                            <option value="12">12개월</option>
+                                        </select>
+                                        <div class="selectbox-box">
+                                            <div class="selectbox-label" unselectable="on">일시불</div>
+                                        </div>
+                                        
+                                        <span class="drop"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                        <td class="info_word">
+                            <ul class="card_event_lst _eventArea">
+                            </ul>
+                            <ul class="card_event_lst _benefitArea" style="display: block;"></ul>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="blind">계좌 간편결제</h4>
+                    <table class="pay_list _easyBankCodeList _bank_simple_pay_area" style="display: none;" cellspacing="0" cellpadding="0" border="0">
+                        <caption><span class="blind">계좌 간편결제 선택</span></caption>
+                        <tbody>
+                            <tr>
+                                <td class="_payMethod _011">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(011)) _stopDefault">
+                                    <span class="pay_logo bank_011"></span>
+                                    <span class="pay_text">NH농협</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _004">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(004)) _stopDefault">
+                                    <span class="pay_logo bank_004"></span>
+                                    <span class="pay_text">국민은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _088">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(088)) _stopDefault">
+                                    <span class="pay_logo bank_088"></span>
+                                    <span class="pay_text">신한은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _020">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(020)) _stopDefault">
+                                    <span class="pay_logo bank_020"></span>
+                                    <span class="pay_text">우리은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _003">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(003)) _stopDefault">
+                                    <span class="pay_logo bank_003"></span>
+                                    <span class="pay_text">기업은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _023">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(023)) _stopDefault">
+                                    <span class="pay_logo bank_023"></span>
+                                    <span class="pay_text">SC은행</span>
+                                    </a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td class="_payMethod _032">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(032)) _stopDefault">
+                                    <span class="pay_logo bank_032"></span>
+                                    <span class="pay_text">부산은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _039">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(039)) _stopDefault">
+                                    <span class="pay_logo bank_039"></span>
+                                    <span class="pay_text">경남은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _007">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(007)) _stopDefault">
+                                    <span class="pay_logo bank_007"></span>
+                                    <span class="pay_text">수협은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _071">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(071)) _stopDefault">
+                                    <span class="pay_logo bank_071"></span>
+                                    <span class="pay_text">우체국</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _238">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(238)) _stopDefault">
+                                    <span class="pay_logo bank_238"></span>
+                                    <span class="pay_text">미래에셋</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _031">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(031)) _stopDefault">
+                                    <span class="pay_logo bank_031"></span>
+                                    <span class="pay_text">대구은행</span>
+                                    </a>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td class="_payMethod _034">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(034)) _stopDefault">
+                                    <span class="pay_logo bank_034"></span>
+                                    <span class="pay_text">광주은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _037">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(037)) _stopDefault">
+                                    <span class="pay_logo bank_037"></span>
+                                    <span class="pay_text">전북은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _045">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(045)) _stopDefault">
+                                    <span class="pay_logo bank_045"></span>
+                                    <span class="pay_text">새마을금고</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _035">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(035)) _stopDefault">
+                                    <span class="pay_logo bank_035"></span>
+                                    <span class="pay_text">제주은행</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _048">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(048)) _stopDefault">
+                                    <span class="pay_logo bank_048"></span>
+                                    <span class="pay_text">신협</span>
+                                    </a>
+                                </td>
+                                <td class="_payMethod _081">
+                                    <a href="#" class="_click(nmp.front.nsp.paymentSheet.changePayMethod(081)) _stopDefault">
+                                    <span class="pay_logo bank_081"></span>
+                                    <span class="pay_text">하나은행</span>
+                                    </a>
+                                </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+                    <input type="hidden" class="_freeInterestInstallmentSellerCommissionRate _payForm" name="freeInterestInstallmentInfo.freeInterestInstallmentSellerCommissionRate">
+
+                    <input type="hidden" class="_freeInterestInstallmentBrdnCoreTypeCode  _payForm" name="freeInterestInstallmentInfo.freeInterestInstallmentBrdnCoreTypeCode">
+
+                    <input type="hidden" class="_freeInterestInstallmentApplyYn _payForm" name="freeInterestInstallmentInfo.freeInterestInstallmentApplyYn">
+
+                    <input type="hidden" class="_partFreeInterestBurdenMonths _payForm" name="freeInterestInstallmentInfo.partFreeInterestBurdenMonths">
+
+                    <input type="hidden" class="_freeInterestMiniminApplyAmount _payForm" name="freeInterestInstallmentInfo.freeInterestMiniminApplyAmount">
+                    <input type="hidden" class="_freeInterestInstallmentType _payForm" name="freeInterestInstallmentInfo.freeInterestInstallmentType" value="NON_INSTALLMENT">
+
+                    <input type="hidden" name="defaultEasyCardCode" value="C0">
+                    <input type="hidden" name="defaultEasyBankCode" value="011">
+                    <input type="hidden" name="totalReviewMileage" value="0">
+                </div>
+
+
+                <div class="_cash_receipt_area" style="display:none">
+
+
+                    <div class="receipt_space _cashReceiptInputForm">
+                        <h3 class="h3 h_text">현금영수증</h3>
+
+                        <div class="receipt_cont">
+                            <ul class="rad_list horizontal">
+                                <li>
+                                    <span class="_cashReceiptApply radio-applied _click(nmp.front.nsp.paymentSheet.switchCashReceiptApply(on))"><span class="radio-mark radio-checked"></span>
+                                    <input type="radio" name="cashReceiptApply1" id="cashReceiptApply" checked="checked"></span>
+                                    <label for="cashReceiptApply">신청하기</label>
+                                </li>
+                                <li>
+                                    <span class="_cashReceiptApply radio-applied _click(nmp.front.nsp.paymentSheet.switchCashReceiptApply(off))"><span class="radio-mark"></span>
+                                    <input type="radio" name="cashReceiptApply1" id="cashReceiptNotApply"></span>
+                                    <label for="cashReceiptNotApply">신청안함</label>
+                                </li>
+                            </ul>
+
+                            <div id="cashReceiptInputForm" class="receipt_option _cashReceiptInputForm">
+
+                                <ul class="rad_list horizontal">
+                                    <li>
+                                        <span class="_cashReceiptIssueType radio-applied _click(nmp.front.nsp.paymentSheet.switchCashReceiptIssueType(PR_CELL_PHONE_NUMBER))"><span class="radio-mark radio-checked"></span>
+                                        <input type="radio" name="cashReceiptIssueType" id="cashReceiptPrivate" checked="checked"></span>
+                                        <label for="cashReceiptPrivate">개인소득공제용</label>
+                                    </li>
+                                    <li>
+                                        <span class="_cashReceiptIssueType radio-applied _click(nmp.front.nsp.paymentSheet.switchCashReceiptIssueType(BUSINESS_REGISTRATION_NUMBER))"><span class="radio-mark"></span>
+                                        <input type="radio" name="cashReceiptIssueType" id="cashReceiptBusiness"></span>
+                                        <label for="cashReceiptBusiness">사업자증빙용</label>
+                                    </li>
+                                </ul>
+
+                                <div class="receipt_inner">
+                                    <div id="sel-cashReceiptIssueClassType" class="select_section">
+                                        <select class="selectbox-source _change(nmp.front.nsp.paymentSheet.selectBoxCashReceiptIssueType())" title="현금영수증 발행방식 선택">
+                                                        <option value="PR_CELL_PHONE_NUMBER" selected="">휴대폰번호</option>
+                                                        <option value="PR_SOCIAL_NUMBER">주민등록번호</option>
+                                                        <option value="PR_CASH_RECEIPT_CARD_NUMBER">현금영수증카드번호</option>
+                                        </select>
+
+                                        
+
+                                        <div class="selectbox-box">
+                                            <div class="selectbox-label" unselectable="on">휴대폰번호</div>
+                                        </div>
+                                        <span class="drop"></span>
+                                    </div>
+
+                                    <div id="cashReceiptIssueInputArea" class="input_num">
+                                        <div id="tpl_mobilePhone" class="group_receipt_input cellphone_group _mobilePhoneKeyUpEvt" style="display: block;">
+                                            <div class="select_section">
+                                                <div id="mobilePhone" class="">
+                                                    <select class="selectbox-source _mobileCashReceiptsFirstInput">
+                                                        <option value="010">010</option>
+                                                        <option value="011">011</option>
+                                                        <option value="016">016</option>
+                                                        <option value="017">017</option>
+                                                        <option value="018">018</option>
+                                                        <option value="019">019</option>
+                                                    </select>
+                                                    <div class="selectbox-box">
+                                                        <div class="selectbox-label" unselectable="on">010</div>
+                                                    </div>
+                                                    
+                                                    <span class="drop"></span>
+                                                </div>
+                                            </div>
+                                            -
+                                            <input type="text" title="휴대폰번호가운데자리" maxlength="4" value="" pattern="[0-9]" class="_keyUpEvt inp_txt2">-
+                                            <input type="text" title="휴대폰번호뒷자리" maxlength="4" value="" pattern="[0-9]" class="_keyUpEvt inp_txt2">
+                                        </div>
+                                        <div id="tpl_socialNum" class="group_receipt_input resident_group _socialNumKeyUpEvt" style="display: none;">
+                                            <input type="tel" title="주민등록번호앞6자리" maxlength="6" value="" class="_keyUpEvt inp_txt2"> -
+                                            <input type="password" title="주민등록번호뒷7자리" maxlength="7" value="" class="_keyUpEvt inp_txt2">
+                                        </div>
+                                        <div id="tpl_receiptCardNum" class="group_receipt_input cardnum_group _receiptCardNumKeyUpEvt" style="display: none;">
+                                            <input type="text" title="현금영수증 첫 4자리" maxlength="4" value="" class="_keyUpEvt inp_txt2"> -
+                                            <input type="text" title="현금영수증 두번째 4자리" maxlength="4" value="" class="_keyUpEvt inp_txt2"> -
+                                            <input type="text" title="현금영수증 세번째 4자리" maxlength="4" value="" class="_keyUpEvt inp_txt2"> -
+                                            <input type="text" title="현금영수증 네번째 4자리" maxlength="7" value="" class="_keyUpEvt inp_txt2 input_receipt">
+                                        </div>
+                                        <div id="tpl_bizNum" class="cash_receipt" style="display: none;">
+                                            <strong class="tit_receipt_corp">사업자 등록번호</strong>
+                                            <div class="group_receipt_input _bizNumKeyUpEvt">
+                                                <input type="tel" title="사업자 등록 번호 앞3자리" maxlength="3" value="" class="_keyUpEvt inp_txt2 input_copr_m"> -
+                                                <input type="tel" title="사업자 등록 번호 가운데 2자리" maxlength="2" value="" class="_keyUpEvt inp_txt2 input_copr_m"> -
+                                                <input type="password" title="사업자 등록 번호 마지막 5자리" maxlength="5" value="" class="_keyUpEvt inp_txt2 input_copr_l">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="receipt_agree s_checkbox">
+                                            <span class="checkbox checkbox-applied _click(nmp.front.nsp.paymentSheet.switchUpdateReceipt())" id="btn-updateReceiptAgree">
+                                                <span class="checkbox-mark checkbox-checked"></span>
+                                                <input type="checkbox" id="updateReceiptAgree">
+                                            </span>
+                                        <label for="updateReceiptAgree">현금영수증 신청정보를 저장</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <dl class="spot_benefit_pay benefit_fold_panel ">
+                        <dt class="fold_heading">
+                            <a href="#" class="N=a:osr.bnfold desc_heading _click(nmp.front.nsp.paymentSheet.benefitPollDing()) _stopDefault">
+                                <strong class="tit_benefit"><span class="logo_pay">네이버페이</span> 적립 혜택 </strong>
+                                (<strong class="thm">0</strong>원 적립 예정)
+                                <span class="sp_order toggle_arrow">적립자세히보기</span>
+                            </a>
+                        </dt>
+                        <dd class="fold_body">
+                            <ul class="list_benefit">
+                                <li class="item_benefit">기본적립 1% <strong class="thm">0</strong>원 예정 (네이버페이 결제 시 제공)<a href="#" class="N=a:osr.bninfo sp_order ico_que benefit_link _click(nmp.front.nsp.paymentSheet.showLayer(lyPointBenefitNoticeLayer)) _stopDefault" title="?">도움말</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                <div class="agree_space">
+                    <div class="agree_required">
+                        <span class="checkbox checkbox-applied _click(nmp.front.nsp.paymentSheet.onToggleAllAgree())" id="btn-payAgreeAll">
+                        <span class="N=a:osr.allagree checkbox-mark checkbox-checked"></span>
+                        <input id="agree_all" name="payAgreement" type="checkbox" class="N=a:osr.allagree _certificationForm _allAgreeBtn" title="전체동의">
+                        </span>
+                        <label for="agree_all">전체 동의하기<span class="require"><em class="blind">필수입력</em></span></label>
+                    </div>
+                    <ul class="agree_sub_list">
+                        <li class="agree_sub">
+                            <div class="s_checkbox">
+                                <span class="checkbox checkbox-applied _click(nmp.front.nsp.paymentSheet.checkAllAgreed())" id="btn-payAgree">
+                                <span class="N=a:osr.buyagree checkbox-mark checkbox-checked"></span>
+                                <input type="checkbox" name="payAgreement" id="agree_c1" class="N=a:osr.buyagree _agreeBtn ">
+                                </span>
+                                <label for="agree_c1">위 상품의 구매조건 확인 및 결제진행 동의</label>
+                            </div>
+                        </li>
+                        <li class="agree_sub">
+                            <div class="s_checkbox">
+                                <span class="checkbox checkbox-applied _click(nmp.front.nsp.paymentSheet.checkAllAgreed())" id="btn-payInfoShareAgree">
+                                <span class="N=a:osr.infoagree checkbox-mark checkbox-checked"></span>
+                                <input type="checkbox" name="c" id="agree_c2" class="N=a:osr.infoagree _agreeBtn">
+                                </span>
+                                <label for="agree_c2">거래정보 제공 동의 (제공 받는 판매자 : <em class="join">테스트가맹점</em>)</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="inner_right">
+            <div class="payment_sum">
+                <h3 class="h3 h_text">총 결제금액</h3>
+                <div class="total_sum">
+                    <h4 class="blind">최종결제금액</h4>
+                    <div class="num_space _totalPayAmt">
+    <em class="n1">1</em>
+        <em class="comma">,</em>
+    <em class="n0">0</em>
+    <em class="n0">0</em>
+    <em class="n0">0</em>
+                        <span class="txt">원</span>
+                    </div>
+                </div>
+                <dl class="payinfo_list">
+                <dt>상품금액</dt>
+                <dd><em class="f_thm">1,000</em>원</dd>
+                <dt>포인트 사용금액</dt>
+                <dd>(-)<em class="f_thm _mileageUsedAmount">0</em>원</dd>
+                </dl>
+            </div>
+            <div class="benefit_receipt">
+                <div class="simplepay_benefit">
+                        <h3 class="h3 h_text">네이버페이 혜택</h3>
+                        <ul class="benefit_list">
+                            <li class="benefit_item"><a href="#" class="N=a:osr.bnffirst benefit_link _click(nmp.front.nsp.paymentSheet.showLayer(firstPaymentBenefitNoticeLayer)) _stopDefault">첫 등록 시 포인트 1000원 적립</a><a href="#" class="sp_order ico_arrow" title="">바로가기</a></li>
+                        </ul>
+                </div>
+
+                <div class="text_info_area">
+                    <span>무이자할부/청구할인</span><a href="#" class="N=a:osr.bnfinssale sp_order ico_que _click(nmp.front.nsp.paymentSheet.openCardBenefitsPopup()) _stopDefault" title="?">도움말</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom_area">
+        <span class="band"></span>
+        <a href="#" class="N=a:osr.transaction bottom_btn type_green _click(nmp.front.nsp.paymentSheet.create()) _stopDefault"><span class="payment sr_only">결제</span></a>
+        <a href="#" class="N=a:osr.cancel bottom_btn _click(nmp.front.nsp.paymentSheet.cancel()) _stopDefault"><span class="cancle sr_only">취소</span></a>
+    </div>
+</div>
+</div>
+
+<input type="hidden" name="firstSelectPayMethod" class="_firstPayMethod">
+<input type="hidden" name="billingPgId" class="_pgId _payForm">
+<input type="hidden" name="reserveSeq" value="" class="_payForm">
+
+</form>
+<a href="#" target="naverPayAuth" style="display:none;" class="_naverPayAuthPopup _click(nmp.front.nsp.paymentSheet.openNaverPayAuthPopup())"></a>
+
+<div id="benefitNoticeLayer" class="ly_type2" style="display:none">
+<dl class="ly_cont ly_cont_npay">
+<dt><span class="sp_npay">네이버 페이</span> 적립 혜택</dt>
+<dd>
+        <p class="info_txt"><strong>결제 금액 기준으로 결제 시점부터 일 이후 적립됩니다.</strong></p>
+
+    <p class="info_txt">결제 건당 최고 2만원까지 포인트 적립됩니다.<br>
+    포인트 적립 전 결제 취소하면 취소한 금액을  제외한 결제 금액  기준으로 포인트가 적립됩니다.<br>
+    포인트 적립 후 결제 취소하면 취소한 금액의 적립된 포인트는 차감됩니다.<br>
+    </p>
+</dd>
+</dl>
+<a href="#" class="clse _click(nmp.layer.hide()) _stopDefault"><span class="blind">닫기</span></a>
+</div>
+
+<div id="firstPaymentBenefitNoticeLayer" class="ly_type2" style="display:none">
+
+<dl class="ly_cont ly_cont_npay">
+    <dt><span class="sp_npay">네이버 페이</span> 간편결제 계좌 첫 등록 혜택</dt>
+    <dd>
+        <p class="info_txt">네이버페이 <strong>간편결제 계좌 첫 등록</strong>시 현금처럼 사용가능한 네이버페이 포인트 <strong>1000원</strong>을 즉시 지급 해드립니다.</p>
+        <p class="info_txt">등록완료 이후 네이버페이포인트 지급내역 바로 확인하실 수 있습니다.</p>
+        <a href="http://campaign.naver.com/event/npay-addaccount" class="btn_more" target="_blank">자세히보기</a>
+    </dd>
+</dl>
+
+<a href="#" class="clse _click(nmp.layer.hide()) _stopDefault"><span class="blind">닫기</span></a>
+</div>
+
+<div class="ly_loading2 _payProgressLayer " style="display:none">
+<div class="ly_cont">
+    <img src="//img.pay.naver.net/z/wstatic/img/service/front/nsp/loading2.gif" alt="" class="img_loading2" width="32" height="8"><strong class="desc _ly_txt"></strong>
+</div>
+</div>
+
+<div id="lyPointBenefitNoticeLayer" class="ly_type2" style="display:none;">
+<dl class="ly_cont ly_cont_npay">
+    <dt><span class="sp_npay">네이버 페이</span> 적립 혜택</dt>
+    <dd>
+        <ul class="info_save">
+            <li class="item_save">기본적립 1% : 네이버페이 결제 시 제공</li>
+
+        </ul>
+            <p class="info_txt emph">결제완료 시점으로부터 일 이후 적립됩니다.</p>
+        <p class="info_txt">1회 결제 기준 최대 2만원까지만 적립됩니다. 포인트 적립 전 결제 취소 시<br>취소한 금액을 제외한 결제금액 기준으로 포인트가 적립됩니다. 포인트<br>적립 후 결제 취소하면 취소한 금액의 적립된 포인트는 차감됩니다.</p>
+
+    </dd>
+</dl>
+<a href="#" class="clse _click(nmp.layer.hide())"><span class="blind">닫기</span></a>
+</div>
+
+
+<div id="lyPointBenefitLimitNoticeLayer" class="ly_type2" style="display:none;">
+<dl class="ly_cont ly_cont_npay">
+    <dt><span class="sp_npay">네이버 페이</span> 포인트 적립 및 사용 제한 안내</dt>
+    <dd>
+        <ul class="info_save">
+            일부 결제의 경우 네이버페이 포인트 적립 및 사용이 제한됩니다.
+        </ul>
+        <p class="info_txt">
+            네이버페이 정책에 따라 특정 상품(온라인 이용권 및 후원금 등)이나<br>
+            추가 비용을 결제하는 경우 포인트 적립 및 사용이 제한될 수 있습니다.
+        </p>
+    </dd>
+</dl>
+<a href="#" class="clse _click(nmp.layer.hide())"><span class="blind">닫기</span></a>
+</div>
+
+
+
+<script type="text/template" id="tpl_events">
+<li>{=content}</li>
+</script>
+<script type="text/template" id="tpl_interest">
+<li><span class='point_color'>부분 무이자 할부 적용  ({=content}회차 수수료 고객 부담)</span></li>
+</script>
+<script type="text/template" id="tpl_corpCardNotice">
+{set corpCardDisableComment = "<span class='business_card'> 법인카드 할부(무이자혜택) 적용 불가</span>" }
+
+{if isEntireFreeInstallment}
+    <li><span class="point_color">무이자 할부 적용 </span> / {=corpCardDisableComment}</li>
+{else}
+    <li>{=corpCardDisableComment}</li>
+{/if}
+</script>
+<div class="_tempLayer"></div>
+<iframe src="" id="pgIframe" name="pgIframe" style="display:none;" title="빈프레임" width="500px" height="620px" frameborder="0"></iframe>
+
+<div class="ly_wrap" id="pointAlert" style="display:none;">
+<div class="ly_container error">
+    <strong class="ly_tit">잠시 후 다시 시도해 주세요.</strong>
+    <p class="ly_desc">네이버페이 <em class="point_txt">포인트 정보 확인이 불가하여</em><br>일시적으로 결제가 불가합니다.</p>
+    <a href="#" class="btn_prev _click(nmp.front.nsp.paymentSheet.userCancel()) _stopDefault">확인</a>
+</div>
+</div>
+    </div>
+
+</div>

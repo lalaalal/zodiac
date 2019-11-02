@@ -1,5 +1,7 @@
 package org.zodiac.delivery.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -72,6 +74,30 @@ public class DeliveryController {
             return "status";
     }
 
+    @GetMapping("/view")
+    public String view(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
+        try {
+            DeliveryDB deliveryDB = new DeliveryDB();
+            ArrayList<Delivery> deliveries = deliveryDB.getDeliveries();
+
+            String output = "";
+            for (int i = 0;  i < deliveries.size(); i++) {
+                Delivery delivery = deliveries.get(i);
+                output += delivery.getNo() + " " + delivery.getDescribe() + " " + delivery.getSenderName() + " " + delivery.getSenderPhone() + " " + delivery.getRecipientName() + " " + delivery.getSenderPhone() + " " + delivery.getRecipientAddress() + " " + delivery.getStatus() + "\n";
+            }
+
+            model.addAttribute("text", output);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return "view";
+    }
+
     @GetMapping("/check/delivery")
     public String check(Model model,HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -89,7 +115,7 @@ public class DeliveryController {
         }
 
         if (setDeliveryModelByNo(Integer.parseInt(no), model))
-            return "search";
+            return "check";
         else
             return "status";
     }
@@ -153,6 +179,25 @@ public class DeliveryController {
             model.addAttribute("status", false);
         }
         
+        return "status";
+    }
+
+    @PostMapping("/update/address")
+    public String updateAddress(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserController.checkUserLoggedIn(model, session);
+
+        String address = request.getParameter("address");
+        try {
+            DeliveryDB deliveryDB = new DeliveryDB();
+            deliveryDB.updateAddress(address);
+            
+            model.addAttribute("status", true);
+        } catch(Exception e) {
+            e.printStackTrace();
+            model.addAttribute("status", false);
+        }
+
         return "status";
     }
 

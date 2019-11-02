@@ -22,9 +22,27 @@
                     주소 : <span th:text="${recipientAddress}"></span> <br>
                     상태 : <span th:text="${status}"></span>
                 </div>
+                
                 <button class="btn btn-primary" type="submit" name="check" value="yes">승인</button>
                 <button class="btn" type="submit" name="check" value="no">거절</button>
             </form>
+            <form class="input-group mb-3 card-body" action="/update/address" method="POST">
+                <div class="input-group mb-3">
+                    <input class="form-control" name="address" type="text" placeholder="주소">
+                </div>
+                <input class="btn btn-primary" type="submit" value="주소 변경">
+            </form>
+            <script class="card-body" src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"
+                data-client-id="u86j4ripEt8LRfPGzQ8"
+                data-mode="production"
+                data-merchant-user-key="fsd2v24gcc"
+                data-merchant-pay-key="sfd2edgd"
+                data-product-name="택배"
+                data-total-pay-amount="1000"
+                data-tax-scope-amount="1000"
+                data-tax-ex-scope-amount="0"
+                data-return-url="http://bontin.ga/">
+            </script>
         </div>
     </div>
 </html>
